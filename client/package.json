@@ -1,6 +1,6 @@
 {
-  "name": "template-vite-react-ts-tailwind-v3",
-  "version": "0.0.0",
+  "name": "Krypt",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
