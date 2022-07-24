@@ -11,10 +11,6 @@ lerna-debug.log*
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
-*.yarn
-*.idea
-/.yarn
-/.idea
 pids
 *.pid
 *.seed
@@ -115,6 +111,10 @@ dist
 .vscode-test
 
 # yarn v2
+client/.yarn
+client/.idea
+.idea
+.yarn
 .yarn/cache
 .yarn/unplugged
 .yarn/build-state.yml
