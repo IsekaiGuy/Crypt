@@ -30,9 +30,15 @@ const Input = ({placeholder, name, type, value, handleChange}:IInput) => {
 }
 
 const Welcome = () => {
-    const {connectWallet, currentAccount} = useContext(TransactionContext);
+    const {connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction} = useContext(TransactionContext);
+    const {addressTo, amount, keyword, message} = formData;
 
-    const handleSubmit = () => {
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+
+        if(!addressTo || !amount || !message || !keyword) return;
+
+        sendTransaction();
     }
 
     return (<div className='flex w-full justify-center items-center'>
@@ -101,33 +107,37 @@ const Welcome = () => {
                         placeholder='Address To'
                         name='addressTo'
                         type='text'
-                        handleChange={() => {}}
+                        handleChange={handleChange}
+                        value={addressTo}
                     />
                     <Input
                         placeholder='Amount (ETH)'
                         name='amount'
                         type='number'
-                        handleChange={() => {}}
+                        handleChange={handleChange}
+                        value={amount}
                     />
                     <Input
                         placeholder='Keyword (Gif)'
                         name='keyword'
                         type='text'
-                        handleChange={() => {}}
+                        handleChange={handleChange}
+                        value={keyword}
                     />
                     <Input
                         placeholder='Enter Message'
                         name='message'
                         type='text'
-                        handleChange={() => {}}
+                        handleChange={handleChange}
+                        value={message}
                     />
 
                     <div className='h-[1px] w-full bg-gray-400 my-2'/>
-                    {true
+                    {false
                         ? <Loader />
                         : (<button
                             type='button'
-                            onClick={handleSubmit}
+                            onClick={(e) => handleSubmit(e)}
                             className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer'
                         >
                             Send Now
