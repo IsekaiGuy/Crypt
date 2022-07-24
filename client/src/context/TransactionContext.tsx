@@ -25,13 +25,21 @@ export const TransactionProvider = ({children}:any) => {
     const [isLoading, setIsLoading] = useState(false);
     const [transactionCount, setTransactionCount] = useState(localStorage.getItem('transactionCount'));
 
+    const clearForm = () => {
+        setFormData({
+            addressTo: '',
+            amount: '',
+            keyword: '',
+            message: ''
+        })
+    }
+
     const handleChange = (e:ChangeEvent<HTMLInputElement>, name:string) => {
         setFormData((prevState) => ({
           ...prevState,
           [name]: e.target.value
         }))
-    }
-
+    };
     const checkIfWalletIsConnected = async () => {
        try {
            if(!ethereum) return alert('Please, install Metamask!');
@@ -89,6 +97,7 @@ export const TransactionProvider = ({children}:any) => {
             await transactionHash.wait();
 
             setIsLoading(false);
+            clearForm();
 
             const transactionCount = await transactionContract.getTransactionCount();
             setTransactionCount(transactionCount.toNumber());
