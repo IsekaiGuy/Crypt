@@ -22,6 +22,8 @@ export const TransactionProvider = ({children}:any) => {
         keyword: '',
         message: ''
     });
+    const [isLoading, setIsLoading] = useState(false);
+    const [transactionCount, setTransactionCount] = useState(localStorage.getItem('transactionCount'));
 
     const handleChange = (e:ChangeEvent<HTMLInputElement>, name:string) => {
         setFormData((prevState) => ({
@@ -79,7 +81,17 @@ export const TransactionProvider = ({children}:any) => {
                     gas: '0x5208',
                     value: parsedAmount._hex
                 }]
-            })
+            });
+
+            const transactionHash = await transactionContract.addToBlockchain(addressTo, parsedAmount, message, keyword);
+            setIsLoading(true);
+
+            await transactionHash.wait();
+
+            setIsLoading(false);
+
+            const transactionCount = await transactionContract.getTransactionCount();
+            setTransactionCount(transactionCount.toNumber());
         } catch (err) {
             console.log(err);
 
