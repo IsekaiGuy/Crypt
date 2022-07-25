@@ -1,5 +1,4 @@
 import {TransactionContext} from "../context/TransactionContext";
-import dummyData from "../utils/dummyData";
 import {useContext} from "react";
 import {shortenAddress} from "../utils/shortenAddress";
 import useFetch from "../hooks/useFetch";
@@ -14,7 +13,7 @@ interface ITransactionCard {
     url: string
 }
 
-const ETHERSCAN_URL = 'https://goerli.etherscan.io/address'
+const ETHERSCAN_URL = 'https://goerli.etherscan.io/address';
 
 const TransactionCard = ({addressTo, addressFrom, timestamp, message, keyword, amount, url}:ITransactionCard) => {
     const gifUrl = useFetch(keyword);
@@ -74,7 +73,7 @@ const TransactionCard = ({addressTo, addressFrom, timestamp, message, keyword, a
 }
 
 const Transactions = () => {
-    const {currentAccount} = useContext(TransactionContext);
+    const {currentAccount, transactions} = useContext(TransactionContext);
 
     return (<div className='flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions'>
         <div className='flex flex-col md:p-12 py-12 px-4'>
@@ -89,7 +88,7 @@ const Transactions = () => {
             )}
 
             <div className='flex flex-wrap justify-center items-center mt-10'>
-                {dummyData.reverse().map((transaction, index) => (
+                {transactions.reverse().map((transaction:ITransactionCard, index:number) => (
                     <TransactionCard
                         key={index}
                         {...transaction}

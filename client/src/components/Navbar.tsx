@@ -2,7 +2,8 @@ import {HiMenuAlt4} from 'react-icons/hi';
 import {AiOutlineClose} from 'react-icons/ai';
 
 import logo from '../images/logo.png';
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {TransactionContext} from "../context/TransactionContext";
 
 const names = ['Market', 'Exchange', 'Tutorials', 'Wallets'];
 

@@ -31,7 +31,7 @@ const Input = ({placeholder, name, type, value, handleChange}:IInput) => {
 }
 
 const Welcome = () => {
-    const {connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction} = useContext(TransactionContext);
+    const {connectWallet, currentAccount, formData, isLoading, handleChange, sendTransaction} = useContext(TransactionContext);
     const {addressTo, amount, keyword, message} = formData;
 
     const handleSubmit = (e:any) => {
@@ -134,7 +134,7 @@ const Welcome = () => {
                     />
 
                     <div className='h-[1px] w-full bg-gray-400 my-2'/>
-                    {false
+                    {isLoading
                         ? <Loader />
                         : (<button
                             type='button'
